@@ -24,5 +24,22 @@ namespace PaddlerData
         {
             InitializeComponent();
         }
+
+        private void P_OnWater_Chk_Checked(object sender, RoutedEventArgs e)
+        {
+            if (P_TandC_Chk.IsChecked == false)
+            {
+                string messageBoxText = "Paddler should NOT enter water until\nthey have read TERMS AND CONDITIONS!\n\nAre you sure you want to check them in?";
+                string caption = "WARNING";
+                MessageBoxButton button = MessageBoxButton.YesNo;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxResult result;
+                result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+                
+                if (result == MessageBoxResult.No) P_OnWater_Chk.IsChecked = false;
+            }
+
+
+        }
     }
 }
