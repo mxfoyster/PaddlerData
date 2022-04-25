@@ -23,13 +23,13 @@
         <Button x:Name="FwdBtn" Content="&gt;" HorizontalAlignment="Left" Height="25" Margin="10,344,0,0" VerticalAlignment="Top" Width="80" FontWeight="Bold" FontSize="20" Grid.Column="2" Padding="1,-5,1,1"/>
         <Button x:Name="NewBtn" Content="NEW" Height="25" Margin="165,344,110,0" VerticalAlignment="Top" FontWeight="Normal" FontSize="16" Grid.Column="1"/>
         <Label Grid.Column="1" Content="Paddler Name" HorizontalAlignment="Left" Height="25" Margin="0,24,0,0" VerticalAlignment="Top" Width="180" FontWeight="SemiBold" FlowDirection="RightToLeft" Padding="5,4,5,5"/>
-        <TextBox x:Name="P_Name" Grid.Column="1" HorizontalAlignment="Left" Height="25" Margin="200,24,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="P_Name" Grid.Column="1" HorizontalAlignment="Left" Height="25" Margin="200,24,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" Grid.ColumnSpan="2" TextChanged="P_Name_TextChanged"/>
         <Label Grid.Column="1" Content="Contact No" HorizontalAlignment="Left" Height="25" Margin="0,64,0,0" VerticalAlignment="Top" Width="180" FontWeight="SemiBold" FlowDirection="RightToLeft" Padding="5,4,5,5"/>
-        <TextBox x:Name="P_Number" Grid.Column="1" HorizontalAlignment="Left" Height="25" Margin="200,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="P_Number" Grid.Column="1" HorizontalAlignment="Left" Height="25" Margin="200,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" Grid.ColumnSpan="2" LostFocus="Number_TextInputted" GotFocus="Number_ClearInvalid"/>
         <Label Grid.Column="1" Content="Emergency Contact Name" HorizontalAlignment="Left" Height="25" Margin="0,104,0,0" VerticalAlignment="Top" Width="180" FontWeight="SemiBold" FlowDirection="RightToLeft" Padding="5,4,5,5"/>
         <TextBox x:Name="E_Name" Grid.Column="1" HorizontalAlignment="Left" Height="25" Margin="200,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" Grid.ColumnSpan="2"/>
         <Label Grid.Column="1" Content="Emergency Contact Number" HorizontalAlignment="Left" Height="25" Margin="0,144,0,0" VerticalAlignment="Top" Width="180" FontWeight="SemiBold" FlowDirection="RightToLeft" Padding="5,4,5,5"/>
-        <TextBox x:Name="E_Number" Grid.Column="1" HorizontalAlignment="Left" Height="25" Margin="200,144,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="E_Number" Grid.Column="1" HorizontalAlignment="Left" Height="25" Margin="200,144,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" Grid.ColumnSpan="2" LostFocus="Number_TextInputted" GotFocus="Number_ClearInvalid"/>
         <TextBox x:Name="P_Address" Grid.Column="2" HorizontalAlignment="Left" Height="80" Margin="50,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="300"/>
         <Label Grid.Column="2" Content="Paddler Address" HorizontalAlignment="Left" Height="24" Margin="45,12,0,0" VerticalAlignment="Top" Width="140" Padding="5,4,5,5" FontWeight="Bold"/>
         <Label Grid.Column="2" Content="Medical Conditions" HorizontalAlignment="Left" Height="23" Margin="45,121,0,0" VerticalAlignment="Top" Width="125" FontWeight="Bold"/>
@@ -37,7 +37,7 @@
         <CheckBox x:Name="P_TandC_Chk" Grid.Column="1" Content="Terms &amp; Conditions Read
                   " HorizontalAlignment="Left" Height="16" Margin="25,183,0,0" VerticalAlignment="Top" Width="162" FontWeight="Bold"/>
         <CheckBox x:Name="P_OnWater_Chk" Grid.Column="1" Content="On Water" HorizontalAlignment="Left" Height="16" Margin="215,183,0,0" VerticalAlignment="Top" Width="125" FontWeight="Bold" Checked="P_OnWater_Chk_Checked"/>
-        <Button Grid.Column="1" Content="SAVE" HorizontalAlignment="Left" Height="25" Margin="265,344,0,0" VerticalAlignment="Top" Width="80" FontSize="16"/>
+        <Button x:Name="SaveBtn" Grid.Column="1" Content="SAVE" HorizontalAlignment="Left" Height="25" Margin="265,344,0,0" VerticalAlignment="Top" Width="80" FontSize="16" Click="SaveButton_Click"/>
 
     </Grid>
 </Window>

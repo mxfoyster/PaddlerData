@@ -38,8 +38,57 @@ namespace PaddlerData
                 
                 if (result == MessageBoxResult.No) P_OnWater_Chk.IsChecked = false;
             }
+        }
 
+        private void P_Name_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            
+            //Name check code here
+            
+        }
 
+       
+        /// <summary>
+        /// Uses PhoneNumber class to validate the input.. 
+        /// Called by LoseFocus event using source as reference to which element called it.
+        /// Doing this means we can use same method for any phone number = DRY
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Number_TextInputted(object sender, RoutedEventArgs e)
+        {
+            TextBox? thisTextBox = e.Source as TextBox; //avoid possible null warning
+            if (thisTextBox is not null) //avoid possible null warning
+            {   
+                string numToCheck = thisTextBox.Text;
+                PhoneNumber thisPhoneNumber = new PhoneNumber(numToCheck);
+                if (!thisPhoneNumber.Validate()) thisTextBox.Text = "Invalid Entry";
+            }            
+        }
+
+        /// <summary>
+        /// Clears the box when re-focused after invalid entry 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Number_ClearInvalid(object sender, RoutedEventArgs e)
+        {
+            TextBox? thisTextBox = e.Source as TextBox; //avoid possible null warning
+            if (thisTextBox is not null) //agan, avoid null warning
+                if (thisTextBox.Text == "Invalid Entry") thisTextBox.Text = "";
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            Paddler thisPaddler = new Paddler();
+            thisPaddler.paddlerName = P_Name.Text;
+            thisPaddler.paddlerNumber = P_Number.Text;
+            thisPaddler.emergencyName = E_Name.Text;
+            thisPaddler.emergencyNumber = E_Number.Text;
+            thisPaddler.paddlerAddress = P_Address.Text;
+            thisPaddler.paddlerMedical = P_Medical.Text;
+            if (P_TandC_Chk.IsChecked == true) thisPaddler.termsRead = true; // doing this was saves problems from type bool? and bool
+            if (P_OnWater_Chk.IsChecked == true) thisPaddler.onWater = true; //as above
         }
     }
 }
