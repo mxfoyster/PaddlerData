@@ -19,8 +19,8 @@
             <ColumnDefinition Width="79*"/>
             <ColumnDefinition Width="7*"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="BackBtn" Content="&lt;" HorizontalAlignment="Left" Height="25" Margin="65,344,0,0" VerticalAlignment="Top" Width="80" FontWeight="Bold" FontSize="20" Grid.Column="1" Padding="1,-5,1,1"/>
-        <Button x:Name="FwdBtn" Content="&gt;" HorizontalAlignment="Left" Height="25" Margin="10,344,0,0" VerticalAlignment="Top" Width="80" FontWeight="Bold" FontSize="20" Grid.Column="2" Padding="1,-5,1,1"/>
+        <Button x:Name="BackBtn" Content="&lt;" HorizontalAlignment="Left" Height="25" Margin="65,344,0,0" VerticalAlignment="Top" Width="80" FontWeight="Bold" FontSize="20" Grid.Column="1" Padding="1,-5,1,1" Click="BackBtn_Click"/>
+        <Button x:Name="FwdBtn" Content="&gt;" HorizontalAlignment="Left" Height="25" Margin="10,344,0,0" VerticalAlignment="Top" Width="80" FontWeight="Bold" FontSize="20" Grid.Column="2" Padding="1,-5,1,1" Click="FwdBtn_Click"/>
         <Button x:Name="NewBtn" Content="NEW" Height="25" Margin="165,344,110,0" VerticalAlignment="Top" FontWeight="Normal" FontSize="16" Grid.Column="1"/>
         <Label Grid.Column="1" Content="Paddler Name" HorizontalAlignment="Left" Height="25" Margin="0,24,0,0" VerticalAlignment="Top" Width="180" FontWeight="SemiBold" FlowDirection="RightToLeft" Padding="5,4,5,5"/>
         <TextBox x:Name="P_Name" Grid.Column="1" HorizontalAlignment="Left" Height="25" Margin="200,24,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" Grid.ColumnSpan="2" TextChanged="P_Name_TextChanged"/>

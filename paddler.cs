@@ -18,7 +18,7 @@ namespace PaddlerData
         public bool termsRead;
         public bool onWater;
 
-        //we'll initialise everuthing before we start
+        //we'll initialise everything before we start
         public Paddler()
         {
             paddlerName = "";
@@ -30,5 +30,19 @@ namespace PaddlerData
             termsRead = false;
             onWater = false;   
         }
+
+        public Paddler(string paddlerName, string paddlerNumber, string emergencyName, string emergencyNumber, string paddlerAddress, 
+                        string paddlerMedical, bool termsRead, bool onWater)
+        {
+            this.paddlerName = paddlerName;
+            this.paddlerNumber = paddlerNumber; 
+            this.emergencyName = emergencyName;
+            this.emergencyNumber = emergencyNumber;
+            this.paddlerAddress = paddlerAddress;
+            this.paddlerMedical = paddlerMedical;
+            this.termsRead = termsRead;
+            this.onWater = onWater;
+        }
+       
     }
 }

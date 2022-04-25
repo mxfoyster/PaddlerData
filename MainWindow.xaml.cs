@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace PaddlerData
 {
     /// <summary>
@@ -20,9 +21,15 @@ namespace PaddlerData
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<Paddler>  paddlers = new List <Paddler>();
+        int currentPaddler = 0;
+        PaddlerXML paddlerXML = new PaddlerXML();
+       
         public MainWindow()
         {
             InitializeComponent();
+            paddlerXML.LoadData(paddlers);
+            PopulatePanel();
         }
 
         private void P_OnWater_Chk_Checked(object sender, RoutedEventArgs e)
@@ -89,6 +96,68 @@ namespace PaddlerData
             thisPaddler.paddlerMedical = P_Medical.Text;
             if (P_TandC_Chk.IsChecked == true) thisPaddler.termsRead = true; // doing this was saves problems from type bool? and bool
             if (P_OnWater_Chk.IsChecked == true) thisPaddler.onWater = true; //as above
+            paddlers[currentPaddler] = thisPaddler;
+        }
+
+        private void PopulatePanel()
+        {
+            Paddler thisPaddler = new Paddler();
+            thisPaddler = paddlers[currentPaddler];
+            P_Name.Text = thisPaddler.paddlerName;
+            P_Number.Text = thisPaddler.paddlerNumber; 
+            E_Name.Text = thisPaddler.emergencyName;
+            E_Number.Text = thisPaddler.emergencyNumber;
+            P_Address.Text = thisPaddler.paddlerAddress;
+            P_Medical.Text = thisPaddler.paddlerMedical;
+            P_TandC_Chk.IsChecked = thisPaddler.termsRead;
+            P_OnWater_Chk.IsChecked = thisPaddler.onWater;      
+        }
+
+        //RIGHT ARROW LOGIC
+        private void FwdBtn_Click(object sender, RoutedEventArgs e)
+        {
+            SavePanelToList();
+            if (currentPaddler < (paddlers.Count-1))
+            {
+                currentPaddler++;
+                PopulatePanel();
+            }
+            else
+            {
+                currentPaddler = 0;
+                PopulatePanel();
+            }
+        }
+
+        //LEFT ARROW LOGIC
+        private void BackBtn_Click(object sender, RoutedEventArgs e)
+        {
+            SavePanelToList();
+            if (currentPaddler > 0)
+            {
+                currentPaddler--;
+                PopulatePanel();
+            }
+            else
+            {
+                currentPaddler = paddlers.Count - 1;
+                PopulatePanel();
+            }
+        }
+
+        //Copies current screen content into our list of paddlers at current index
+        private void SavePanelToList()
+        {
+            Paddler thisPaddler = new Paddler();
+            thisPaddler.paddlerName = P_Name.Text;
+            thisPaddler.paddlerNumber = P_Number.Text;
+            thisPaddler.emergencyName = E_Name.Text;
+            thisPaddler.emergencyNumber = E_Number.Text;
+            thisPaddler.paddlerAddress = P_Address.Text;
+            thisPaddler.paddlerMedical = P_Medical.Text;
+            if (P_TandC_Chk.IsChecked == true) thisPaddler.termsRead = true; // doing this was saves problems from type bool? and bool
+            if (P_OnWater_Chk.IsChecked == true) thisPaddler.onWater = true; //as above
+            paddlers[currentPaddler] = thisPaddler;
         }
     }
 }
