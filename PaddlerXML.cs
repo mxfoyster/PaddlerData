@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Xml;
+using System.IO;
 
 namespace PaddlerData
 {
@@ -12,6 +13,7 @@ namespace PaddlerData
     {
         //XmlDocument paddlerDoc = new XmlDocument();
         string xmlFilename = "PaddlerData.xml";
+        string xmlBackupFile = "PaddlerData.bak";
 
         /// <summary>
         /// Load the XML file 
@@ -24,12 +26,13 @@ namespace PaddlerData
             {
                 using var paddlerReader = XmlReader.Create(xmlFilename);
                 
-                paddlerReader.ReadToFollowing("paddler");
-                paddlerReader.MoveToFirstAttribute();
+                paddlerReader.ReadToFollowing("paddler");//gets us to the first paddler element
+                paddlerReader.MoveToFirstAttribute(); //steps into it
+                
+                //the capture loop, iterates once for each paddler element
                 do
                 {
-                    paddlerReader.ReadToFollowing("paddlerName");
-                    //paddlers[0].paddlerName = "testing array";//paddlerReader.ReadElementContentAsString();
+                    paddlerReader.ReadToFollowing("paddlerName"); //It's important these are in order..
                     string thisPaddlerName = paddlerReader.ReadElementContentAsString();
 
                     paddlerReader.ReadToFollowing("paddlerNum");
@@ -52,10 +55,13 @@ namespace PaddlerData
 
                     paddlerReader.ReadToFollowing("onWater");
                     bool thisOnWater = paddlerReader.ReadElementContentAsBoolean();
+                    
+                    //now add current xml data to the list
                     paddlers.Add(new Paddler(thisPaddlerName, thisPaddlerNumber, thisEmergencyName, thisEmergencyNumber, thisPaddlerAddress, thisPaddlerMedical,
                                    thisTermsRead, thisOnWater));
 
                 } while (paddlerReader.ReadToFollowing("paddler"));
+                paddlerReader.Close();
             }
             catch (Exception ex)
             {
@@ -65,6 +71,45 @@ namespace PaddlerData
                 MessageBoxImage icon = MessageBoxImage.Warning;
                 MessageBox.Show(messageBoxText, caption, button, icon);
             }
-        }
+        }//end of LoadData()
+
+        public void SaveData (List<Paddler> paddlers)
+        {
+            //first let's backup the original file
+            File.Copy(xmlFilename, xmlBackupFile, true);
+
+            //now setup the writer and open the file
+            XmlWriterSettings settings = new XmlWriterSettings();
+            settings.Indent = true;
+            settings.IndentChars = "\t";
+            XmlWriter paddlerWriter = XmlWriter.Create(xmlFilename, settings);
+
+            //now let's put the data in it
+            paddlerWriter.WriteStartDocument();
+            paddlerWriter.WriteStartElement("paddlers");
+            foreach(Paddler paddler in paddlers)
+            {
+                paddlerWriter.WriteStartElement("paddler");
+                    paddlerWriter.WriteElementString("paddlerName", paddler.paddlerName);
+                    paddlerWriter.WriteElementString("paddlerNum",paddler.paddlerNumber);
+                    paddlerWriter.WriteElementString("emergencyName", paddler.emergencyName);
+                    paddlerWriter.WriteElementString("emergencyNum",paddler.emergencyNumber);
+                    paddlerWriter.WriteElementString("paddlerAddress",paddler.paddlerAddress);
+                    paddlerWriter.WriteElementString("paddlerMedical",paddler.paddlerMedical);
+                    
+                    if (paddler.termsRead == false) paddlerWriter.WriteElementString("readTandC", "false");
+                    else paddlerWriter.WriteElementString("readTandC", "true");
+
+                    if (paddler.onWater == false) paddlerWriter.WriteElementString("onWater", "false");
+                    else paddlerWriter.WriteElementString("onWater", "true");
+                paddlerWriter.WriteEndElement();
+            }
+            paddlerWriter.WriteEndElement();
+            paddlerWriter.WriteEndDocument();
+            
+            //flush the buffer and close the file
+            paddlerWriter.Flush();
+            paddlerWriter.Close();
+        }//end of SaveData
     }
 }

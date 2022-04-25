@@ -87,16 +87,8 @@ namespace PaddlerData
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            Paddler thisPaddler = new Paddler();
-            thisPaddler.paddlerName = P_Name.Text;
-            thisPaddler.paddlerNumber = P_Number.Text;
-            thisPaddler.emergencyName = E_Name.Text;
-            thisPaddler.emergencyNumber = E_Number.Text;
-            thisPaddler.paddlerAddress = P_Address.Text;
-            thisPaddler.paddlerMedical = P_Medical.Text;
-            if (P_TandC_Chk.IsChecked == true) thisPaddler.termsRead = true; // doing this was saves problems from type bool? and bool
-            if (P_OnWater_Chk.IsChecked == true) thisPaddler.onWater = true; //as above
-            paddlers[currentPaddler] = thisPaddler;
+            SavePanelToList();
+            paddlerXML.SaveData(paddlers);
         }
 
         private void PopulatePanel()
@@ -158,6 +150,22 @@ namespace PaddlerData
             if (P_TandC_Chk.IsChecked == true) thisPaddler.termsRead = true; // doing this was saves problems from type bool? and bool
             if (P_OnWater_Chk.IsChecked == true) thisPaddler.onWater = true; //as above
             paddlers[currentPaddler] = thisPaddler;
+        }
+
+        private void NewBtn_Click(object sender, RoutedEventArgs e)
+        {
+            currentPaddler = paddlers.Count();
+            Paddler thisPaddler = new Paddler();
+            thisPaddler.paddlerName = "Testing";
+            thisPaddler.paddlerNumber = "";
+            thisPaddler.emergencyName = "";
+            thisPaddler.emergencyNumber = "";
+            thisPaddler.paddlerAddress = "";
+            thisPaddler.paddlerMedical = "";
+            thisPaddler.termsRead = false;
+            thisPaddler.onWater = false;
+            paddlers.Add(thisPaddler);
+            PopulatePanel();
         }
     }
 }
