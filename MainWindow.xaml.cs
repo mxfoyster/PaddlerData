@@ -167,5 +167,43 @@ namespace PaddlerData
             paddlers.Add(thisPaddler);
             PopulatePanel();
         }
+
+        private void AboutBox(object sender, RoutedEventArgs e)
+        {
+            string messageBoxText = "Paddler Data Version 1.0.0\n\nBy Mark Foyster April 2022\n\nGNU GENERAL PUBLIC LICENSE Version 3";
+            string caption = "About";
+            MessageBoxButton button = MessageBoxButton.OK;
+            MessageBoxImage icon = MessageBoxImage.Information;
+            MessageBox.Show(messageBoxText, caption, button, icon);
+        }
+
+        private void HelpBox(object sender, RoutedEventArgs e)
+        {
+            string messageBoxText = "Paddler Data Version 1.0.0\n\nInstructions\n\nAll the help information will go here when we know exactly what this app will do.";
+            string caption = "Help";
+            MessageBoxButton button = MessageBoxButton.OK;
+            MessageBoxImage icon = MessageBoxImage.Information;
+            MessageBox.Show(messageBoxText, caption, button, icon);
+        }
+
+        private void QuitBox(object sender, RoutedEventArgs e)
+        {
+            string messageBoxText = "Are you sure you want to quit?\n\nWould you like to save the Paddler Data?";
+            string caption = "Quit";
+            MessageBoxButton button = MessageBoxButton.YesNoCancel;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            MessageBoxResult result;
+            result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+            
+            if (result == MessageBoxResult.Yes)
+            {
+                SavePanelToList();
+                paddlerXML.SaveData(paddlers);
+                this.Close();
+            }
+            
+            if (result == MessageBoxResult.No) this.Close();
+        }
+
     }
 }
