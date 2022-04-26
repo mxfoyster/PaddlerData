@@ -4,40 +4,66 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PaddlerData"
-        mc:Ignorable="d"
-        Title="Paddler Information" Height="450" Width="800">
-    <Grid>
+        mc:Ignorable="d" Height="400" Width="650" Title="Paddler Information">
+
+
+    <Grid Margin="0,0,0,0">
+
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FFDAD3D3" Offset="0.037"/>
+                <GradientStop Color="#FFDAD3D3" Offset="0"/>
                 <GradientStop Color="#FF7DA3AF" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="71*"/>
-            <ColumnDefinition Width="79*"/>
-            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="180"/>
+            <ColumnDefinition Width="230"/>
+            <ColumnDefinition Width="10*"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="BackBtn" Content="&lt;" HorizontalAlignment="Left" Height="25" Margin="65,344,0,0" VerticalAlignment="Top" Width="80" FontWeight="Bold" FontSize="20" Grid.Column="1" Padding="1,-5,1,1" Click="BackBtn_Click"/>
-        <Button x:Name="FwdBtn" Content="&gt;" HorizontalAlignment="Left" Height="25" Margin="10,344,0,0" VerticalAlignment="Top" Width="80" FontWeight="Bold" FontSize="20" Grid.Column="2" Padding="1,-5,1,1" Click="FwdBtn_Click"/>
-        <Button x:Name="NewBtn" Content="NEW" Height="25" Margin="165,344,110,0" VerticalAlignment="Top" FontWeight="Normal" FontSize="16" Grid.Column="1" Click="NewBtn_Click"/>
-        <Label Grid.Column="1" Content="Paddler Name" HorizontalAlignment="Left" Height="25" Margin="0,24,0,0" VerticalAlignment="Top" Width="180" FontWeight="SemiBold" FlowDirection="RightToLeft" Padding="5,4,5,5"/>
-        <TextBox x:Name="P_Name" Grid.Column="1" HorizontalAlignment="Left" Height="25" Margin="200,24,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" Grid.ColumnSpan="2" TextChanged="P_Name_TextChanged"/>
-        <Label Grid.Column="1" Content="Contact No" HorizontalAlignment="Left" Height="25" Margin="0,64,0,0" VerticalAlignment="Top" Width="180" FontWeight="SemiBold" FlowDirection="RightToLeft" Padding="5,4,5,5"/>
-        <TextBox x:Name="P_Number" Grid.Column="1" HorizontalAlignment="Left" Height="25" Margin="200,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" Grid.ColumnSpan="2" LostFocus="Number_TextInputted" GotFocus="Number_ClearInvalid"/>
-        <Label Grid.Column="1" Content="Emergency Contact Name" HorizontalAlignment="Left" Height="25" Margin="0,104,0,0" VerticalAlignment="Top" Width="180" FontWeight="SemiBold" FlowDirection="RightToLeft" Padding="5,4,5,5"/>
-        <TextBox x:Name="E_Name" Grid.Column="1" HorizontalAlignment="Left" Height="25" Margin="200,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" Grid.ColumnSpan="2"/>
-        <Label Grid.Column="1" Content="Emergency Contact Number" HorizontalAlignment="Left" Height="25" Margin="0,144,0,0" VerticalAlignment="Top" Width="180" FontWeight="SemiBold" FlowDirection="RightToLeft" Padding="5,4,5,5"/>
-        <TextBox x:Name="E_Number" Grid.Column="1" HorizontalAlignment="Left" Height="25" Margin="200,144,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" Grid.ColumnSpan="2" LostFocus="Number_TextInputted" GotFocus="Number_ClearInvalid"/>
-        <TextBox x:Name="P_Address" Grid.Column="2" HorizontalAlignment="Left" Height="80" Margin="50,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="300"/>
-        <Label Grid.Column="2" Content="Paddler Address" HorizontalAlignment="Left" Height="24" Margin="45,12,0,0" VerticalAlignment="Top" Width="140" Padding="5,4,5,5" FontWeight="Bold"/>
-        <Label Grid.Column="2" Content="Medical Conditions" HorizontalAlignment="Left" Height="23" Margin="45,121,0,0" VerticalAlignment="Top" Width="125" FontWeight="Bold"/>
-        <TextBox x:Name="P_Medical" Grid.Column="2" HorizontalAlignment="Left" Height="68" Margin="50,149,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="300"/>
-        <CheckBox x:Name="P_TandC_Chk" Grid.Column="1" Content="Terms &amp; Conditions Read
-                  " HorizontalAlignment="Left" Height="16" Margin="25,183,0,0" VerticalAlignment="Top" Width="162" FontWeight="Bold"/>
-        <CheckBox x:Name="P_OnWater_Chk" Grid.Column="1" Content="On Water" HorizontalAlignment="Left" Height="16" Margin="215,183,0,0" VerticalAlignment="Top" Width="125" FontWeight="Bold" Checked="P_OnWater_Chk_Checked"/>
-        <Button x:Name="SaveBtn" Grid.Column="1" Content="SAVE" HorizontalAlignment="Left" Height="25" Margin="265,344,0,0" VerticalAlignment="Top" Width="80" FontSize="16" Click="SaveButton_Click"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="60" />
+        </Grid.RowDefinitions>
+        <Menu Grid.ColumnSpan="4" Margin="0,0,0,0" Grid.Row="0">
+            <MenuItem x:Name="FileMenu" Header="_File">
+                <MenuItem x:Name="FileOpen" Header="Open"/>
+                <MenuItem x:Name="FileSave" Header="Save"/>
+                <Separator/>
+                <MenuItem x:Name="FileExit" Header="Exit"/>
+            </MenuItem>
+            <MenuItem Header="_Edit">
+                <MenuItem Command="Cut" />
+                <MenuItem Command="Copy" />
+                <MenuItem Command="Paste" />
+            </MenuItem>
+            <MenuItem x:Name="AboutMenu" Header="About">
+                <MenuItem x:Name="AboutHelp" Header="Help"/>
+                <MenuItem x:Name="AboutAbout" Header="About"/>
+            </MenuItem>
+        </Menu>
+
+
+        <Button x:Name="BackBtn" Grid.Row="2" Grid.ColumnSpan="4" Content="&lt;" Height="25" HorizontalAlignment="Left" Margin="40,10,0,0" VerticalAlignment="Top" Width="80" FontWeight="Bold" FontSize="20" Padding="1,-5,1,1" Click="BackBtn_Click"/>
+        <Button x:Name="FwdBtn" Grid.Row="2" Grid.ColumnSpan="4" Content="&gt;" Height="25" HorizontalAlignment="Left" Margin="480,10,0,0" VerticalAlignment="Top" Width="80" FontWeight="Bold" FontSize="20" Padding="1,-5,1,1" Click="FwdBtn_Click"/>
+        <Button x:Name="NewBtn" Grid.Row="2" Grid.ColumnSpan="4" Content="NEW" Height="25" HorizontalAlignment="Left" Margin="160,10,0,0" VerticalAlignment="Top"  Width =" 80" FontWeight="Normal" FontSize="16" Click="NewBtn_Click"/>
+        <Button x:Name="SaveBtn" Grid.Row ="2" Grid.ColumnSpan="4" Content="SAVE" Height="25" HorizontalAlignment="Left" Margin="320,10,0,0" VerticalAlignment="Top" Width="80" FontSize="16" Click="SaveButton_Click"/>
+        <Label Grid.Column="0" Grid.Row ="1" Content="Paddler Name" HorizontalAlignment="Left" Height="25" Margin="23,21,0,0" VerticalAlignment="Top" Width="180" FontWeight="SemiBold" FlowDirection="RightToLeft" Padding="5,4,5,5" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="P_Name" Grid.Row ="1" Grid.Column="1" HorizontalAlignment="Center" Height="25" Margin="0,21,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="162" TextChanged="P_Name_TextChanged" MaxLines="2147483645"/>
+        <Label Grid.Column="0" Grid.Row ="1" Content="Contact No" HorizontalAlignment="Left" Height="25" Margin="23,61,0,0" VerticalAlignment="Top" Width="180" FontWeight="SemiBold" FlowDirection="RightToLeft" Padding="5,4,5,5" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="P_Number" Grid.Row ="1" Grid.Column="1" HorizontalAlignment="Center" Height="25" Margin="0,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="162" LostFocus="Number_TextInputted" GotFocus="Number_ClearInvalid" MaxLines="2147483645"/>
+        <Label Grid.Column="0" Grid.Row ="1" Content="Emergency Contact Name" HorizontalAlignment="Left" Height="25" Margin="23,101,0,0" VerticalAlignment="Top" Width="180" FontWeight="SemiBold" FlowDirection="RightToLeft" Padding="5,4,5,5" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="E_Name" Grid.Row ="1" Grid.Column="1" HorizontalAlignment="Center" Height="25" Margin="0,101,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="162" MaxLines="2147483645"/>
+        <Label Grid.Column="0" Grid.Row ="1" Content="Emergency Contact Number" HorizontalAlignment="Left" Height="25" Margin="23,141,0,0" VerticalAlignment="Top" Width="180" FontWeight="SemiBold" FlowDirection="RightToLeft" Padding="5,4,5,5" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="E_Number" Grid.Row ="1" Grid.Column="1" HorizontalAlignment="Center" Height="25" Margin="0,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="162" LostFocus="Number_TextInputted" GotFocus="Number_ClearInvalid" MaxLines="2147483645"/>
+        <TextBox x:Name="P_Address" Grid.Row ="1" Grid.Column="2" HorizontalAlignment="Left" Height="80" Margin="14,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" AcceptsReturn="True"/>
+        <Label Grid.Column="2" Grid.Row ="1" Content="Paddler Address" HorizontalAlignment="Left" Height="24" Margin="10,9,0,0" VerticalAlignment="Top" Width="140" Padding="5,4,5,5" FontWeight="Bold"/>
+        <Label Grid.Column="2" Grid.Row ="1" Content="Medical Conditions" HorizontalAlignment="Left" Height="23" Margin="10,118,0,0" VerticalAlignment="Top" Width="125" FontWeight="Bold"/>
+        <TextBox x:Name="P_Medical" Grid.Row ="1" Grid.Column="2" HorizontalAlignment="Left" Height="68" Margin="14,146,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="216" AcceptsReturn="True"/>
+        <CheckBox x:Name="P_TandC_Chk" Grid.Row ="1" Grid.Column="0" Content="Terms &amp; Conditions Read
+                  " HorizontalAlignment="Right" Height="16" Margin="0,180,0,0" VerticalAlignment="Top" Width="162" FontWeight="Bold"/>
+        <CheckBox x:Name="P_OnWater_Chk" Grid.Row ="1" Grid.Column="1" Content="On Water" HorizontalAlignment="Left" Height="16" Margin="10,180,0,0" VerticalAlignment="Top" Width="125" FontWeight="Bold" Checked="P_OnWater_Chk_Checked"/>
 
     </Grid>
 </Window>
