@@ -21,20 +21,21 @@ namespace PaddlerData
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<Paddler>  paddlers = new List <Paddler>();
+        List<Paddler> paddlers = new List<Paddler>();
         int currentPaddler = 0;
         PaddlerXML paddlerXML = new PaddlerXML();
-       
+
         public MainWindow()
         {
             InitializeComponent();
             paddlerXML.LoadData(paddlers);
             PopulatePanel();
+            CountPaddlersOnWater();
         }
 
         private void P_OnWater_Chk_Checked(object sender, RoutedEventArgs e)
         {
-            if (P_TandC_Chk.IsChecked == false)
+            if (P_TandC_Chk.IsChecked == false && P_OnWater_Chk.IsChecked == true)
             {
                 string messageBoxText = "Paddler should NOT enter water until\nthey have read TERMS AND CONDITIONS!\n\nAre you sure you want to check them in?";
                 string caption = "WARNING";
@@ -42,19 +43,20 @@ namespace PaddlerData
                 MessageBoxImage icon = MessageBoxImage.Warning;
                 MessageBoxResult result;
                 result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
-                
+
                 if (result == MessageBoxResult.No) P_OnWater_Chk.IsChecked = false;
             }
+            SavePanelToList();
         }
 
         private void P_Name_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
+
             //Name check code here
-            
+
         }
 
-       
+
         /// <summary>
         /// Uses PhoneNumber class to validate the input.. 
         /// Called by LoseFocus event using source as reference to which element called it.
@@ -66,11 +68,11 @@ namespace PaddlerData
         {
             TextBox? thisTextBox = e.Source as TextBox; //avoid possible null warning
             if (thisTextBox is not null) //avoid possible null warning
-            {   
+            {
                 string numToCheck = thisTextBox.Text;
                 PhoneNumber thisPhoneNumber = new PhoneNumber(numToCheck);
                 if (!thisPhoneNumber.Validate()) thisTextBox.Text = "Invalid Entry";
-            }            
+            }
         }
 
         /// <summary>
@@ -85,10 +87,52 @@ namespace PaddlerData
                 if (thisTextBox.Text == "Invalid Entry") thisTextBox.Text = "";
         }
 
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
+
+        /// <summary>
+        /// Handles deleting the entry on screen in both file and memory
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             SavePanelToList();
             paddlerXML.SaveData(paddlers);
+            //Dialog 'are you sure?
+            string messageBoxText = "Are you sure you want to delete this paddler?\n\nThe details will be permanently lost";
+            string caption = "Delete Paddler";
+            MessageBoxButton button = MessageBoxButton.OKCancel;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            MessageBoxResult result;
+            result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Cancel);
+
+            if (result == MessageBoxResult.OK)
+            {
+                //delete this entry as long as it's not the only one
+                if (paddlers.Count > 1)
+                {
+                    paddlers.RemoveAt(currentPaddler);
+                    paddlerXML.SaveData(paddlers);
+                    if (currentPaddler > 0) currentPaddler -= 1;
+                    PopulatePanel();
+                    CountPaddlersOnWater();
+                }
+                else //otherwise set it as blank and then save it
+                {
+                    P_Name.Text = "";
+                    P_Number.Text = "";
+                    E_Name.Text = "";
+                    E_Number.Text = "";
+                    P_Address.Text = "";
+                    P_Medical.Text = "";
+                    P_TandC_Chk.IsChecked = false;
+                    P_OnWater_Chk.IsChecked = false;
+
+                    SavePanelToList();
+                    CountPaddlersOnWater();
+                }
+
+
+            }
         }
 
         private void PopulatePanel()
@@ -96,20 +140,20 @@ namespace PaddlerData
             Paddler thisPaddler = new Paddler();
             thisPaddler = paddlers[currentPaddler];
             P_Name.Text = thisPaddler.paddlerName;
-            P_Number.Text = thisPaddler.paddlerNumber; 
+            P_Number.Text = thisPaddler.paddlerNumber;
             E_Name.Text = thisPaddler.emergencyName;
             E_Number.Text = thisPaddler.emergencyNumber;
             P_Address.Text = thisPaddler.paddlerAddress;
             P_Medical.Text = thisPaddler.paddlerMedical;
             P_TandC_Chk.IsChecked = thisPaddler.termsRead;
-            P_OnWater_Chk.IsChecked = thisPaddler.onWater;      
+            P_OnWater_Chk.IsChecked = thisPaddler.onWater;
         }
 
         //RIGHT ARROW LOGIC
         private void FwdBtn_Click(object sender, RoutedEventArgs e)
         {
             SavePanelToList();
-            if (currentPaddler < (paddlers.Count-1))
+            if (currentPaddler < (paddlers.Count - 1))
             {
                 currentPaddler++;
                 PopulatePanel();
@@ -150,13 +194,15 @@ namespace PaddlerData
             if (P_TandC_Chk.IsChecked == true) thisPaddler.termsRead = true; // doing this was saves problems from type bool? and bool
             if (P_OnWater_Chk.IsChecked == true) thisPaddler.onWater = true; //as above
             paddlers[currentPaddler] = thisPaddler;
+            CountPaddlersOnWater();
         }
 
         private void NewBtn_Click(object sender, RoutedEventArgs e)
         {
+            SavePanelToList();
             currentPaddler = paddlers.Count();
             Paddler thisPaddler = new Paddler();
-            thisPaddler.paddlerName = "Testing";
+            thisPaddler.paddlerName = "";
             thisPaddler.paddlerNumber = "";
             thisPaddler.emergencyName = "";
             thisPaddler.emergencyNumber = "";
@@ -201,7 +247,7 @@ namespace PaddlerData
             MessageBoxImage icon = MessageBoxImage.Warning;
             MessageBoxResult result;
             result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
-            
+
             //Save progress before exit as chosen
             if (result == MessageBoxResult.Yes)
             {
@@ -209,7 +255,7 @@ namespace PaddlerData
                 paddlerXML.SaveData(paddlers);
                 this.Close();
             }
-            
+
             if (result == MessageBoxResult.No) this.Close();
         }
         private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -260,6 +306,11 @@ namespace PaddlerData
             }
         }
 
+        /// <summary>
+        /// Our file - open code using system dialog
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FileOpen(object sender, RoutedEventArgs e)
         {
             //Prompt user we are automatically saving first
@@ -304,5 +355,16 @@ namespace PaddlerData
                 }
             }
         }
+
+        private void CountPaddlersOnWater()
+        {
+            int count = 0;
+            foreach (Paddler thisPaddler in paddlers)
+            {
+                if (thisPaddler.onWater == true) count++; 
+            }
+            NumPaddlersBox.Text = count.ToString();
+        }
+
     }
 }
