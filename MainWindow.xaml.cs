@@ -186,8 +186,15 @@ namespace PaddlerData
             MessageBox.Show(messageBoxText, caption, button, icon);
         }
 
+
+        /// <summary>
+        /// Called on close through file menu
+        /// </summary>
+        /// <param name="sender">ref to sending element</param>
+        /// <param name="e">event sent</param>
         private void QuitBox(object sender, RoutedEventArgs e)
         {
+            //Dialog 'are you sure?
             string messageBoxText = "Are you sure you want to quit?\n\nWould you like to save the Paddler Data?";
             string caption = "Quit";
             MessageBoxButton button = MessageBoxButton.YesNoCancel;
@@ -195,6 +202,7 @@ namespace PaddlerData
             MessageBoxResult result;
             result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
             
+            //Save progress before exit as chosen
             if (result == MessageBoxResult.Yes)
             {
                 SavePanelToList();
@@ -204,6 +212,97 @@ namespace PaddlerData
             
             if (result == MessageBoxResult.No) this.Close();
         }
+        private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
 
+        private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            //code to do when new chosen here
+        }
+
+        /// <summary>
+        /// File - Save selected.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SaveCurrent(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine(paddlerXML.GetFilename());
+            SavePanelToList();
+            paddlerXML.SaveData(paddlers);
+        }
+
+        /// <summary>
+        /// Our File - Save As handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SaveAs(object sender, RoutedEventArgs e)
+        {
+            var dialog = new Microsoft.Win32.SaveFileDialog();
+            dialog.FileName = "PaddlerData"; // Default file name
+            dialog.DefaultExt = ".xml"; // Default file extension
+            dialog.Filter = "XML Document (.xml)|*.xml"; // Filter files by extension
+
+            // Show open file dialog box
+            bool? result = dialog.ShowDialog();
+
+            // Process open file dialog box results
+            if (result == true)
+            {
+                // Open document
+                string thisFilename = dialog.FileName;
+                paddlerXML.SetFilename(thisFilename);
+                SavePanelToList();
+                paddlerXML.SaveData(paddlers);
+            }
+        }
+
+        private void FileOpen(object sender, RoutedEventArgs e)
+        {
+            //Prompt user we are automatically saving first
+            string AutoSavemessageBoxText = "Just so you know,\n\nThe file you were just working on will be saved automatically.";
+            string AutoSavecaption = "Saving";
+            MessageBoxButton AutoSavebutton = MessageBoxButton.OK;
+            MessageBoxImage AutoSaveicon = MessageBoxImage.Exclamation;
+            MessageBox.Show(AutoSavemessageBoxText, AutoSavecaption, AutoSavebutton, AutoSaveicon);
+            //So we save like we said we would
+            SavePanelToList();
+            paddlerXML.SaveData(paddlers);
+            //Open the File Open Dialog
+            var dialog = new Microsoft.Win32.OpenFileDialog();
+            dialog.FileName = "PaddlerData"; // Default file name
+            dialog.DefaultExt = ".xml"; // Default file extension
+            dialog.Filter = "XML Document (.xml)|*.xml"; // Filter files by extension
+
+            // Show open file dialog box
+            bool? result = dialog.ShowDialog();
+
+            // Process open file dialog box results
+            if (result == true)
+            {
+                // Open document
+                string thisFilename = dialog.FileName;
+                try
+                {
+                    //clear the list
+                    paddlers.Clear();
+                    //load and display
+                    paddlerXML.SetFilename(thisFilename);
+                    paddlerXML.LoadData(paddlers);
+                    PopulatePanel();
+                }
+                catch (Exception eb)
+                {
+                    string messageBoxText = "I'm afraid there was a problem,\n\nThe file you slected was invalid, please try another file.\n\n Error message: " + eb;
+                    string caption = "Whoops!";
+                    MessageBoxButton button = MessageBoxButton.OK;
+                    MessageBoxImage icon = MessageBoxImage.Error;
+                    MessageBox.Show(messageBoxText, caption, button, icon);
+                }
+            }
+        }
     }
 }

@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:PaddlerData"
         mc:Ignorable="d" Height="400" Width="650" Title="Paddler Information">
 
+    <Window.CommandBindings>
+        <CommandBinding Command="New" CanExecute="NewCommand_CanExecute" Executed="NewCommand_Executed" />
+    </Window.CommandBindings>
 
     <Grid Margin="0,0,0,0">
 
@@ -28,8 +31,11 @@
         </Grid.RowDefinitions>
         <Menu Grid.ColumnSpan="4" Margin="0,0,0,0" Grid.Row="0">
             <MenuItem x:Name="FileMenu" Header="_File">
-                <MenuItem x:Name="FileOpen" Header="Open"/>
-                <MenuItem x:Name="FileSave" Header="Save"/>
+                <MenuItem Command="New" />
+                <Separator />
+                <MenuItem x:Name="FileMenuOpen" Header="Open" Click="FileOpen"/>
+                <MenuItem x:Name="FileSave" Header="Save" Click="SaveCurrent"/>
+                <MenuItem x:Name="FileSaveAs" Header="Save As" Click="SaveAs"/>
                 <Separator/>
                 <MenuItem x:Name="FileExit" Header="Exit" Click="QuitBox"/>
             </MenuItem>

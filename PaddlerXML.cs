@@ -12,8 +12,8 @@ namespace PaddlerData
     internal class PaddlerXML
     {
         //XmlDocument paddlerDoc = new XmlDocument();
-        string xmlFilename = "PaddlerData.xml";
-        string xmlBackupFile = "PaddlerData.bak";
+        private string xmlFilename = "PaddlerData.xml";
+        private string xmlBackupFile = "PaddlerData.bak";
 
         /// <summary>
         /// Load the XML file 
@@ -73,10 +73,21 @@ namespace PaddlerData
             }
         }//end of LoadData()
 
+        public void SetFilename(string newFileName) 
+        {
+            xmlFilename = newFileName;
+            xmlBackupFile = newFileName.Replace(".xml", ".bak");
+        }
+
+        public string GetFilename()
+        {
+            return xmlFilename;
+        }
+
         public void SaveData (List<Paddler> paddlers)
         {
-            //first let's backup the original file
-            File.Copy(xmlFilename, xmlBackupFile, true);
+            //first let's backup the original file (if there is one ie, not save as...)
+           if (File.Exists(xmlFilename)) File.Copy(xmlFilename, xmlBackupFile, true);
 
             //now setup the writer and open the file
             XmlWriterSettings settings = new XmlWriterSettings();
