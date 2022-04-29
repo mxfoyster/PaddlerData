@@ -130,8 +130,6 @@ namespace PaddlerData
                     SavePanelToList();
                     CountPaddlersOnWater();
                 }
-
-
             }
         }
 
@@ -197,20 +195,12 @@ namespace PaddlerData
             CountPaddlersOnWater();
         }
 
+        //handles new button by inserting a new 'record' into our list and clearing display
         private void NewBtn_Click(object sender, RoutedEventArgs e)
         {
             SavePanelToList();
             currentPaddler = paddlers.Count();
-            Paddler thisPaddler = new Paddler();
-            thisPaddler.paddlerName = "";
-            thisPaddler.paddlerNumber = "";
-            thisPaddler.emergencyName = "";
-            thisPaddler.emergencyNumber = "";
-            thisPaddler.paddlerAddress = "";
-            thisPaddler.paddlerMedical = "";
-            thisPaddler.termsRead = false;
-            thisPaddler.onWater = false;
-            paddlers.Add(thisPaddler);
+            paddlerXML.AddBlankPaddler(paddlers);
             PopulatePanel();
         }
 
@@ -356,14 +346,29 @@ namespace PaddlerData
             }
         }
 
+
+        //Counts the number of paddlers within our list with 'On Water' checked and displays the result
         private void CountPaddlersOnWater()
         {
-            int count = 0;
+            int count = 0, counter=0;
+            List <string> paddlersOnWater = new List <String>();
+
             foreach (Paddler thisPaddler in paddlers)
             {
-                if (thisPaddler.onWater == true) count++; 
+             
+                if (thisPaddler.onWater == true)
+                {
+                    count++;
+                    PaddlerOnWater paddlerOnWater = new PaddlerOnWater();
+                    paddlerOnWater.paddlerName = thisPaddler.paddlerName;
+                    //System.Diagnostics.Debug.WriteLine(paddlerOnWater.paddlerName);
+                    paddlerOnWater.indexInPaddlersList = counter;
+                    paddlersOnWater.Add(paddlerOnWater.paddlerName);
+                }
+                counter++; //for our index within list
             }
             NumPaddlersBox.Text = count.ToString();
+            OnWaterPaddlerNames.ItemsSource = paddlersOnWater; //populate the ListBox
         }
 
     }

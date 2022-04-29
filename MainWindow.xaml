@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PaddlerData"
-        mc:Ignorable="d" Height="400" Width="650" Title="Paddler Information">
+        mc:Ignorable="d" Height="445" Width="650" Title="Paddler Information">
 
     <Window.CommandBindings>
         <CommandBinding Command="New" CanExecute="NewCommand_CanExecute" Executed="NewCommand_Executed" />
@@ -28,8 +28,10 @@
             <RowDefinition Height="25"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="60" />
-            <RowDefinition Height="60" />
+            <RowDefinition Height="115" />
         </Grid.RowDefinitions>
+        <Frame Content=" Paddlers On Water" Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="98" Margin="10,0,0,0" Grid.Row="3" VerticalAlignment="Top" Width="600" BorderThickness="1,1,1,1" BorderBrush="Black" FontWeight="Bold" FontSize="16"/>
+
         <Menu Grid.ColumnSpan="4" Margin="0,0,0,0" Grid.Row="0">
             <MenuItem x:Name="FileMenu" Header="_File">
                 <MenuItem Command="New" />
@@ -68,11 +70,11 @@
         <Label Grid.Column="2" Grid.Row ="1" Content="Paddler Address" HorizontalAlignment="Left" Height="24" Margin="10,9,0,0" VerticalAlignment="Top" Width="140" Padding="5,4,5,5" FontWeight="Bold"/>
         <Label Grid.Column="2" Grid.Row ="1" Content="Medical Conditions" HorizontalAlignment="Left" Height="23" Margin="10,118,0,0" VerticalAlignment="Top" Width="125" FontWeight="Bold"/>
         <TextBox x:Name="P_Medical" Grid.Row ="1" Grid.Column="2" HorizontalAlignment="Left" Height="68" Margin="14,146,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="216" AcceptsReturn="True"/>
-        <CheckBox x:Name="P_TandC_Chk" Grid.Row ="1" Grid.Column="0" Content="Terms &amp; Conditions Read
-                  " HorizontalAlignment="Right" Height="16" Margin="0,192,0,0" VerticalAlignment="Top" Width="162" FontWeight="Bold"/>
+        <CheckBox x:Name="P_TandC_Chk" Grid.Row ="1" Grid.Column="0" Content="Terms &amp; Conditions Read                   " HorizontalAlignment="Right" Height="16" Margin="0,192,0,0" VerticalAlignment="Top" Width="162" FontWeight="Bold"/>
         <CheckBox x:Name="P_OnWater_Chk" Grid.Row ="1" Grid.Column="1" Content="On Water" HorizontalAlignment="Left" Height="16" Margin="10,192,0,0" VerticalAlignment="Top" Width="125" FontWeight="Bold" Checked="P_OnWater_Chk_Checked" Unchecked="P_OnWater_Chk_Checked"/>
-        <Label Content="Paddlers On Water:" HorizontalAlignment="Left" Height="25" Margin="10,30,0,0" Grid.Row="3" VerticalAlignment="Top" Width="130" FontSize="14"/>
-        <TextBox x:Name="NumPaddlersBox" HorizontalAlignment="Left" Height="35" Margin="145,30,0,0" Grid.Row="3" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="45" Focusable="False" FontSize="18" FontWeight="Bold" IsReadOnly="True"/>
+        <Label Content="No:" HorizontalAlignment="Left" Height="40" Margin="40,25,0,0" Grid.Row="3" VerticalAlignment="Top" Width="40" FontSize="20" FontWeight="Regular"/>
+        <TextBox x:Name="NumPaddlersBox" HorizontalAlignment="Left" Height="35" Margin="85,30,0,0" Grid.Row="3" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="45" Focusable="False" FontSize="18" FontWeight="Bold" IsReadOnly="True"/>
+        <ListBox x:Name="OnWaterPaddlerNames" Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="72" Margin="160,13,0,0" Grid.Row="3" ToolTip="Names of paddlers currently on the water" VerticalAlignment="Top" Width="420" d:ItemsSource="{d:SampleData ItemCount=5}"/>
 
     </Grid>
 </Window>

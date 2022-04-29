@@ -63,15 +63,35 @@ namespace PaddlerData
                 } while (paddlerReader.ReadToFollowing("paddler"));
                 paddlerReader.Close();
             }
-            catch (Exception ex)
+            catch (Exception ex) //we may store the error later in a log file?
             {
-                string messageBoxText = "Paddler data file not found, loading default data\n\n" + ex;
+                string messageBoxText = "Default paddler data file not found (\"" + xmlFilename + "\"), a blank file of this name will be created!\n\n";
                 string caption = "WARNING";
                 MessageBoxButton button = MessageBoxButton.OK;
                 MessageBoxImage icon = MessageBoxImage.Warning;
                 MessageBox.Show(messageBoxText, caption, button, icon);
+                AddBlankPaddler(paddlers);
+                SaveData(paddlers);
             }
         }//end of LoadData()
+
+        /// <summary>
+        /// Makes a blank instance of paddler and adds it to the list referenced in the parameter
+        /// </summary>
+        /// <param name="paddlers">List to add blank paddler to</param>
+        public void AddBlankPaddler(List <Paddler> paddlers)
+        {
+            Paddler thisPaddler = new Paddler();
+            thisPaddler.paddlerName = "";
+            thisPaddler.paddlerNumber = "";
+            thisPaddler.emergencyName = "";
+            thisPaddler.emergencyNumber = "";
+            thisPaddler.paddlerAddress = "";
+            thisPaddler.paddlerMedical = "";
+            thisPaddler.termsRead = false;
+            thisPaddler.onWater = false;
+            paddlers.Add(thisPaddler);
+        }
 
         public void SetFilename(string newFileName) 
         {
