@@ -1,0 +1,43 @@
+﻿<Window x:Class="PaddlerData.HelpPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PaddlerData"
+        mc:Ignorable="d"
+        Title="Help Page" Height="450" Width="800" Icon="/PaddleIcon.png">
+    <Grid HorizontalAlignment="Center">
+        <Button Content="Back" HorizontalAlignment="Left" Height="30" Margin="665,369,0,0" VerticalAlignment="Top" Width="95" FontSize="14" Click="Button_Click" RenderTransformOrigin="0.474,-0.499"/>
+        <ScrollViewer Width="700" Margin="30,10,30,67" Padding="0,0,10,0">
+        <TextBlock HorizontalAlignment="Center" Margin="0,24,0,0" TextWrapping="WrapWithOverflow"  VerticalAlignment="Top" Width="Auto" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">
+        <Bold FontSize="16">
+            <Run BaselineAlignment="Center" FontStretch="Expanded" Foreground="#FF1843EF" FontSize="20" Text="Welcome to PaddleData"/></Bold>
+        <LineBreak/><LineBreak/><Bold>INTRODUCTION</Bold><LineBreak/>
+           The application stores basic data on a paddler including <Italic>NAME, ADDRESS, PHONE NUMBER</Italic> and any medical conditions that may be relavent. 
+            Additionally, the app stores a name and phone number for an <Italic>EMERGENCY</Italic> contact.
+            <LineBreak /><LineBreak/>
+            <Bold>ENTERING DATA</Bold>
+            <LineBreak/>
+            There are <Italic>TWO</Italic> checkboxes. One that can be checked after the paddler has been confirmed to have read and agreed to any terms and conditions which
+            you need them to read <Italic>BEFORE</Italic> they get on the water. The second checkbox can be checked when the paddler is about to enter the water.
+            The time this box is checked is recorded.<LineBreak/><LineBreak/>
+            <Bold>NOTE:</Bold> If the <Italic>TERMS &amp; CONDITIONS</Italic> box is NOT checked before the <Italic>ON WATER</Italic>  checkbox, a dialog will warn you 
+            of this before you can continue.
+            <LineBreak/><LineBreak/><Bold>NAVIGATION</Bold><LineBreak/>
+            There are controls to navigate <Italic>BACKWARDS</Italic> and <Italic>FORWARDS</Italic> through each paddler's record. When you navigate to a different paddler,
+            the data on the screen will be automatically saved. The <Italic>NEW</Italic> button will allow you to insert a new paddler's data into the records and the 
+            <Italic>DELETE</Italic> button will allow you to delete the paddler currently displayed on screen from the records.
+             <LineBreak/><LineBreak/><Bold>PADDLERS ON THE WATER</Bold><LineBreak/>
+            At the bottom of the screen you will see the number of paddlers currently checked as <Italic>ON THE WATER</Italic> to the left. Their names with the time they 
+            were recorded as having entered the water is displayed in a scrollable list to the right.
+            <LineBreak/><LineBreak/><Bold>SAVING AND LOADING</Bold><LineBreak/>
+            When you first open this application, the default file <Italic>PaddleData.xml</Italic> is loaded. Through the <Italic>FILE</Italic> menu, you can choose to 
+            load and save different file name as in any standard Windows application. If you select a <Italic>NEW</Italic> file, everything will be cleared and the default
+            filename will be <Italic>untitled.xml</Italic>. Before this happens, you will be reminded that the current file will be saved automatically first.
+            You may save any open file to a different filename using the <Italic>SAVE AS</Italic> option.
+
+            </TextBlock>
+        </ScrollViewer>
+
+    </Grid>
+</Window>

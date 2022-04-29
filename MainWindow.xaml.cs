@@ -219,11 +219,13 @@ namespace PaddlerData
 
         private void HelpBox(object sender, RoutedEventArgs e)
         {
-            string messageBoxText = "Paddler Data Version 1.0.0\n\nInstructions\n\nAll the help information will go here when we know exactly what this app will do.";
-            string caption = "Help";
-            MessageBoxButton button = MessageBoxButton.OK;
-            MessageBoxImage icon = MessageBoxImage.Information;
-            MessageBox.Show(messageBoxText, caption, button, icon);
+            //string messageBoxText = "Paddler Data Version 1.0.0\n\nInstructions\n\nAll the help information will go here when we know exactly what this app will do.";
+            //string caption = "Help";
+            //MessageBoxButton button = MessageBoxButton.OK;
+            //MessageBoxImage icon = MessageBoxImage.Information;
+            //MessageBox.Show(messageBoxText, caption, button, icon);
+            HelpPage helpPage = new HelpPage();
+            helpPage.Show();
         }
 
 
@@ -257,9 +259,27 @@ namespace PaddlerData
             e.CanExecute = true;
         }
 
+        /// <summary>
+        /// File - New selected code
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             //code to do when new chosen here
+            string fileNewmessageBoxText = "Just so you know,\n\nThe file you were just working on will be saved automatically.";
+            string fileNewcaption = "New File";
+            MessageBoxButton fileNewbutton = MessageBoxButton.OK;
+            MessageBoxImage fileNewicon = MessageBoxImage.Exclamation;
+            MessageBox.Show(fileNewmessageBoxText, fileNewcaption, fileNewbutton, fileNewicon);
+            //clear the list
+            paddlers.Clear();
+            //change filename and display the empty file (to erase data on screen)
+            paddlerXML.SetFilename("untitled.xml");
+            paddlerXML.AddBlankPaddler(paddlers); //create a blank paddler so we don't throw an exception
+            paddlerXML.SaveData(paddlers);
+            PopulatePanel();
+            CountPaddlersOnWater();
         }
 
         /// <summary>
@@ -282,7 +302,7 @@ namespace PaddlerData
         private void SaveAs(object sender, RoutedEventArgs e)
         {
             var dialog = new Microsoft.Win32.SaveFileDialog();
-            dialog.FileName = "PaddlerData"; // Default file name
+            dialog.FileName = paddlerXML.GetFilename(); // Default file name
             dialog.DefaultExt = ".xml"; // Default file extension
             dialog.Filter = "XML Document (.xml)|*.xml"; // Filter files by extension
 
@@ -351,7 +371,9 @@ namespace PaddlerData
         }
 
 
-        //Counts the number of paddlers within our list with 'On Water' checked and displays the result
+        //Counts the number of paddlers within our list with 'On Water' checked 
+        //displays count in text box and their name and time they were checked onto 
+        //water into a ListBox for easy viewing
         private void CountPaddlersOnWater()
         {
             int count = 0, counter=0;
@@ -374,6 +396,5 @@ namespace PaddlerData
             NumPaddlersBox.Text = count.ToString();
             OnWaterPaddlerNames.ItemsSource = paddlersOnWater; //populate the ListBox
         }
-
     }
 }

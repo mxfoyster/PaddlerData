@@ -7,4 +7,14 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="paddle.bmp" />
+    <None Remove="PaddleIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="paddle.bmp" />
+    <Resource Include="PaddleIcon.png" />
+  </ItemGroup>
+
 </Project>

@@ -8,7 +8,7 @@ namespace PaddlerData
 {
     internal class PaddlerOnWater
     {
-        public string paddlerName;
+        public string paddlerName="";
         public int indexInPaddlersList;
         public DateTime timeOnWater; 
     }

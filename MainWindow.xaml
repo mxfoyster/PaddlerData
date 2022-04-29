@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PaddlerData"
-        mc:Ignorable="d" Height="445" Width="650" Title="Paddler Information">
+        mc:Ignorable="d" Height="445" Width="650" Title="Paddler Information" Icon="/PaddleIcon.png">
 
     <Window.CommandBindings>
         <CommandBinding Command="New" CanExecute="NewCommand_CanExecute" Executed="NewCommand_Executed" />
@@ -73,7 +73,7 @@
         <CheckBox x:Name="P_TandC_Chk" Grid.Row ="1" Grid.Column="0" Content="Terms &amp; Conditions Read                   " HorizontalAlignment="Right" Height="16" Margin="0,192,0,0" VerticalAlignment="Top" Width="162" FontWeight="Bold"/>
         <CheckBox x:Name="P_OnWater_Chk" Grid.Row ="1" Grid.Column="1" Content="On Water" HorizontalAlignment="Left" Height="16" Margin="10,192,0,0" VerticalAlignment="Top" Width="125" FontWeight="Bold" Checked="P_OnWater_Chk_Checked" Unchecked="P_OnWater_Chk_Checked"/>
         <Label Content="No:" HorizontalAlignment="Left" Height="40" Margin="40,25,0,0" Grid.Row="3" VerticalAlignment="Top" Width="40" FontSize="20" FontWeight="Regular"/>
-        <TextBox x:Name="NumPaddlersBox" HorizontalAlignment="Left" Height="35" Margin="85,30,0,0" Grid.Row="3" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="45" Focusable="False" FontSize="18" FontWeight="Bold" IsReadOnly="True"/>
+        <TextBox x:Name="NumPaddlersBox" HorizontalAlignment="Left" Height="35" Margin="85,30,0,0" Grid.Row="3" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="45" Focusable="False" FontSize="18" FontWeight="Bold" IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <ListBox x:Name="OnWaterPaddlerNames" Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="72" Margin="160,13,0,0" Grid.Row="3" ToolTip="Names of paddlers currently on the water" VerticalAlignment="Top" Width="420" d:ItemsSource="{d:SampleData ItemCount=5}"/>
 
     </Grid>
