@@ -46,7 +46,10 @@ namespace PaddlerData
 
                 if (result == MessageBoxResult.No) P_OnWater_Chk.IsChecked = false;
             }
+            
+            if (P_OnWater_Chk.IsChecked == true) paddlers[currentPaddler].timeOnWater = System.DateTime.Now;
             SavePanelToList();
+            
         }
 
         private void P_Name_TextChanged(object sender, TextChangedEventArgs e)
@@ -189,6 +192,7 @@ namespace PaddlerData
             thisPaddler.emergencyNumber = E_Number.Text;
             thisPaddler.paddlerAddress = P_Address.Text;
             thisPaddler.paddlerMedical = P_Medical.Text;
+            thisPaddler.timeOnWater = paddlers[currentPaddler].timeOnWater; //we set this elsewhere so must copy it over
             if (P_TandC_Chk.IsChecked == true) thisPaddler.termsRead = true; // doing this was saves problems from type bool? and bool
             if (P_OnWater_Chk.IsChecked == true) thisPaddler.onWater = true; //as above
             paddlers[currentPaddler] = thisPaddler;
@@ -361,9 +365,9 @@ namespace PaddlerData
                     count++;
                     PaddlerOnWater paddlerOnWater = new PaddlerOnWater();
                     paddlerOnWater.paddlerName = thisPaddler.paddlerName;
-                    //System.Diagnostics.Debug.WriteLine(paddlerOnWater.paddlerName);
                     paddlerOnWater.indexInPaddlersList = counter;
-                    paddlersOnWater.Add(paddlerOnWater.paddlerName);
+                    paddlerOnWater.timeOnWater = thisPaddler.timeOnWater;
+                    paddlersOnWater.Add(paddlerOnWater.paddlerName + " ON WATER SINCE " + paddlerOnWater.timeOnWater.ToString());
                 }
                 counter++; //for our index within list
             }

@@ -54,11 +54,13 @@ namespace PaddlerData
                     bool thisTermsRead = paddlerReader.ReadElementContentAsBoolean();
 
                     paddlerReader.ReadToFollowing("onWater");
+                    string? thisTimeOnWater = paddlerReader.GetAttribute("Time");
+                    if (thisTimeOnWater == null) thisTimeOnWater = System.DateTime.Now.ToString(); //if we have no value, we'll put in current time 
                     bool thisOnWater = paddlerReader.ReadElementContentAsBoolean();
                     
                     //now add current xml data to the list
                     paddlers.Add(new Paddler(thisPaddlerName, thisPaddlerNumber, thisEmergencyName, thisEmergencyNumber, thisPaddlerAddress, thisPaddlerMedical,
-                                   thisTermsRead, thisOnWater));
+                                   thisTermsRead, thisOnWater, Convert.ToDateTime(thisTimeOnWater)));
 
                 } while (paddlerReader.ReadToFollowing("paddler"));
                 paddlerReader.Close();
@@ -131,8 +133,20 @@ namespace PaddlerData
                     if (paddler.termsRead == false) paddlerWriter.WriteElementString("readTandC", "false");
                     else paddlerWriter.WriteElementString("readTandC", "true");
 
-                    if (paddler.onWater == false) paddlerWriter.WriteElementString("onWater", "false");
-                    else paddlerWriter.WriteElementString("onWater", "true");
+                if (paddler.onWater == false)
+                {
+                    paddlerWriter.WriteStartElement("onWater");
+                    paddlerWriter.WriteAttributeString("Time", paddler.timeOnWater.ToString());
+                    paddlerWriter.WriteValue("false"); 
+                    paddlerWriter.WriteEndElement();
+                }
+                else
+                {
+                    paddlerWriter.WriteStartElement("onWater");
+                    paddlerWriter.WriteAttributeString("Time", paddler.timeOnWater.ToString());
+                    paddlerWriter.WriteValue("true");
+                    paddlerWriter.WriteEndElement();
+                } 
                 paddlerWriter.WriteEndElement();
             }
             paddlerWriter.WriteEndElement();

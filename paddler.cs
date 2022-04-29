@@ -17,6 +17,7 @@ namespace PaddlerData
         public string paddlerMedical;
         public bool termsRead;
         public bool onWater;
+        public DateTime timeOnWater;
 
         //we'll initialise everything before we start
         public Paddler()
@@ -32,7 +33,7 @@ namespace PaddlerData
         }
 
         public Paddler(string paddlerName, string paddlerNumber, string emergencyName, string emergencyNumber, string paddlerAddress, 
-                        string paddlerMedical, bool termsRead, bool onWater)
+                        string paddlerMedical, bool termsRead, bool onWater, DateTime timeOnWater)
         {
             this.paddlerName = paddlerName;
             this.paddlerNumber = paddlerNumber; 
@@ -42,6 +43,7 @@ namespace PaddlerData
             this.paddlerMedical = paddlerMedical;
             this.termsRead = termsRead;
             this.onWater = onWater;
+            this.timeOnWater = timeOnWater;
         }
        
     }

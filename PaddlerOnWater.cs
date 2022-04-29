@@ -10,5 +10,6 @@ namespace PaddlerData
     {
         public string paddlerName;
         public int indexInPaddlersList;
+        public DateTime timeOnWater; 
     }
 }
