@@ -16,6 +16,11 @@
         <LineBreak/><LineBreak/><Bold>INTRODUCTION</Bold><LineBreak/>Welcome to <Italic>PaddleData</Italic>. If you have a small paddling event you want to run and you 
             need somewhere to store the basic information of each paddler, this is the right app for you. You can keep track of who is on the water and for how long they
             have been there.
+            <LineBreak/>
+            <LineBreak/>
+            While there is no theoretical limit to how many paddlers this app can manage, I would suggest it is probable suited for a maximum of approximately 40 paddlers. The data is 
+            stored in an XML format and could therefore be imported directly into other appropriate software. Please take all necessary GDPR precautions when using this app, I would advise
+            deleting the data after the event when it is no longer needed.
             <LineBreak/><LineBreak/><Bold>BASIC CONTACT INFORMATION</Bold><LineBreak/>
            </TextBlock>
             <Grid Width="680">
@@ -70,14 +75,16 @@
              <LineBreak/><LineBreak/>
              <Bold>PADDLERS ON THE WATER</Bold>
              <LineBreak/>
-            <Image Source="/paddlersonwater.png" Width="400" Margin="140,5,5,5"/><LineBreak/>        
+            <Image Source="/paddlersonwater.png" Width="450" Margin="115,5,5,5"/><LineBreak/>        
             At the bottom of the screen you will see the number of paddlers currently checked as <Italic>ON THE WATER</Italic> to the left. Their names with the time they 
             were recorded as having entered the water is displayed in a scrollable list to the right.
             <LineBreak/><LineBreak/><Bold>SAVING AND LOADING</Bold><LineBreak/>
             When you first open this application, the default file <Italic>PaddleData.xml</Italic> is loaded. Through the <Italic>FILE</Italic> menu, you can choose to 
-            load and save different file name as in any standard Windows application. If you select a <Italic>NEW</Italic> file, everything will be cleared and the default
-            filename will be <Italic>untitled.xml</Italic>. Before this happens, you will be reminded that the current file will be saved automatically first.
-            You may save any open file to a different filename using the <Italic>SAVE AS</Italic> option.
+            load and save different file name as in any standard Windows application.
+            <LineBreak/>
+            <LineBreak/>
+            If you select a <Italic>NEW</Italic> file, everything will be cleared and the default filename will be <Italic>untitled.xml</Italic>. Before this happens, you will be reminded 
+            that the current file will be saved automatically first. You may save any open file to a different filename using the <Italic>SAVE AS</Italic> option.
 
             </TextBlock>
          </StackPanel>
