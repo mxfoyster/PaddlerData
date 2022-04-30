@@ -8,13 +8,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="AddressMedical.png" />
+    <None Remove="checkboxes.png" />
+    <None Remove="contact.png" />
+    <None Remove="controls.png" />
     <None Remove="paddle.bmp" />
     <None Remove="PaddleIcon.png" />
+    <None Remove="paddlersonwater.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="AddressMedical.png" />
+    <Resource Include="checkboxes.png" />
+    <Resource Include="contact.png" />
+    <Resource Include="controls.png" />
     <Resource Include="paddle.bmp" />
     <Resource Include="PaddleIcon.png" />
+    <Resource Include="paddlersonwater.png" />
   </ItemGroup>
 
 </Project>

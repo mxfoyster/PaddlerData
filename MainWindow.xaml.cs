@@ -358,6 +358,7 @@ namespace PaddlerData
                     paddlerXML.SetFilename(thisFilename);
                     paddlerXML.LoadData(paddlers);
                     PopulatePanel();
+                    CountPaddlersOnWater();
                 }
                 catch (Exception eb)
                 {
