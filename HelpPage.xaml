@@ -85,8 +85,21 @@
             <LineBreak/>
             If you select a <Italic>NEW</Italic> file, everything will be cleared and the default filename will be <Italic>untitled.xml</Italic>. Before this happens, you will be reminded 
             that the current file will be saved automatically first. You may save any open file to a different filename using the <Italic>SAVE AS</Italic> option.
-
-            </TextBlock>
+            <LineBreak/><LineBreak/><Bold>GDPR AND DATA</Bold><LineBreak/>
+            The information stored within this application is personal in nature and therefore sensitive. All data is stored on the user device, there is no mechanism
+            built in of any kind allowing the developer or anyone else to access it. Therefore, it is solely your responsibility as the user to ensure all data permissions
+            are in place. <LineBreak/> <LineBreak/> I suggest that: <LineBreak/>
+            
+            <LineBreak/><Bold>A.</Bold> You make sure that all the necesary permissions are included with the terms and conditions and 
+            accepted by the paddler BEFORE their information is entered.
+            <LineBreak/><Bold>B.</Bold> EVERY measure is made to ensure the device on which the application is installed remains secure from unautorised use for the entire period for
+            which the data remains on the device.
+            <LineBreak/><Bold>C.</Bold> As soon as the event is over, ALL user data is permanently deleted from the device. The XML file will be in the 
+            same folder as the application is installed.
+            <LineBreak/><LineBreak/>
+            These are just py personal suggestions and must not be taken as a legal opinion. If you do not know the rules in your region / country, you need some 
+            professional advice.
+                </TextBlock>
          </StackPanel>
         </ScrollViewer>
 
